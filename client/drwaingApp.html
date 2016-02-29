@@ -10,18 +10,25 @@
 <template name="wall">
 
   <h1>{{title}}</h1>
-  This is a collaberative drawing app. You can use it to do the collaberative design then save the design for later use
+  <h4>This is a collaberative drawing app. You can use it to do the collaberative design then save the design for later use</h4>
   <br>
 
-<button class='save'>Save</button>
-<button class='thicker'>Thicker</button>
-<button class='thinner'>Thinner</button>
-<button class='clear'>Clear</button>
 
-  <div class="row">
-  <div class="col-md-3">Selected color: <span class="label label-primary" id="selected_color">{{selectedColor}}</span></div>
-  <div class="col-md-2" id="slider1">Line thikness: {{selectedThickness}}</div>
-  <div class="col-md-2">{{> brush_types}}</div>
+
+
+<div class="row">
+  <div class="col-md-2">
+    <div class="col-md-4"><button class='save'>Save</button></div>
+    <div class="col-md-4"><button class='thicker'>Thicker</button></div>
+    <div class="col-md-4"><button class='thinner'>Thinner</button></div>
+  </div>
+   <div class="col-md-5">
+     <div class="col-md-4">Selected Line thikness: {{selectedThickness}}</div>
+     <div class="col-md-4">Selected color: {{selectedColor}}</div>
+    <div class="col-md-4">{{> brush_types}}</div>
+  </div>
+  <div class="col-md-1"><button class='clear'>Clear</button></div>
+  <div class="col-md-4"></div>
   </div>
 <br>
 

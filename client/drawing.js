@@ -64,8 +64,6 @@ Canvas = function () {
       .attr("stroke", function (d) { return d.c; })
       .attr("stroke-linejoin", "round");
     }
-    
-    console.log(brushType);
 
     } // end of the if(svg) statement
   }; // end of the canvas.draw function
