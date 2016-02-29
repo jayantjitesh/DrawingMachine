@@ -1,5 +1,6 @@
 <head>
   <title>1-wall</title>
+
 </head>
 
 <body>
@@ -9,20 +10,58 @@
 <template name="wall">
 
   <h1>{{title}}</h1>
-  <button class='clear'>Clear</button>
-  <!-- <button class='red'>Red</button>
-  <button class='blue'>Blue</button>
-  <button class='green'>Green</button>
-  <button class='black'>Black</button>
-  <button class='white'>White</button>
-  <button class='thicker'>Thicker</button>
-  <button class='thinner'>Thinner</button> -->
+  This is a collaberative drawing app. You can use it to do the collaberative design then save the design for later use
+  <br>
 
+<button class='save'>Save</button>
+<button class='thicker'>Thicker</button>
+<button class='thinner'>Thinner</button>
+<button class='clear'>Clear</button>
+
+  <div class="row">
+  <div class="col-md-3">Selected color: <span class="label label-primary" id="selected_color">{{selectedColor}}</span></div>
+  <div class="col-md-2" id="slider1">Line thikness: {{selectedThickness}}</div>
+  <div class="col-md-2">{{> brush_types}}</div>
+  </div>
+<br>
+
+
+ 
   
 
 {{> canvas}}
 
+<div class="demo demo-material-red" id="red">RED</div>
+<div class="demo demo-material-pink" id="pink">PINK</div>
+<div class="demo demo-material-purple" id="purple">PURPLE</div>
+<div class="demo demo-material-deeppurple" id="deeppurple">DEEP PURPLE</div>
+<div class="demo demo-material-indigo" id="indigo">INDIGO</div>
+<div class="demo demo-material-lightblue" id="lightblue">LIGHT BLUE</div>
+<div class="demo demo-material-cyan" id="cyan">CYAN</div>
+<div class="demo demo-material-teal" id="teal">TEAL</div>
+<div class="demo demo-material-lightgreen" id="lightgreen">LIGHT GREEN</div>
+<div class="demo demo-material-lime" id="lime">LIME</div>
+<div class="demo demo-material-lightyellow" id="lightyellow">LIGHT YELLOW</div>
+<div class="demo demo-material-orange" id="cyan">ORANGE</div>
+<div class="demo demo-material-deeporange" id="deeporange">DEEP ORANGE</div>
+<div class="demo demo-material-grey" id="grey">GREY</div>
+<div class="demo demo-material-bluegrey" id="bluegrey">BLUE GREY</div>
+<div class="demo demo-material-brown" id="brown">BROWN</div>
+<div class="demo demo-material-lightgrey" id="cyan">LIGHT GREY</div>
+  
+ 
+ 
 </template>
+
+<template name="brush_types">
+  <form>
+    Brush Types:
+    <select class="js-select-brush-type">
+      <option value="circle">circle</option>
+      <option value="line">line</option>
+    </select>
+  </form>
+</template> 
 
 <template name="canvas">
   <div id='canvas'></div>

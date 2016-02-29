@@ -10,15 +10,28 @@ var strokeColor = "black";
 
 Meteor.startup( function() {
   canvas = new Canvas();
+  Session.set("color",strokeColor);
+  Session.set("thickness",thickness);
+  Session.set("brushType","circle");
 
   Deps.autorun( function() {
     var data = points.find({}).fetch();
 
     if (canvas) {
-      canvas.draw(data);
+      canvas.draw(data,Session.get("brushType"));
     }
   });
 });
+
+Template.wall.helpers({
+ "selectedColor": function () {
+    return Session.get("color");
+    },
+
+    "selectedThickness":  function () {
+       return Session.get("thickness");
+    },
+}),
 
 Template.wall.events({
 
@@ -28,49 +41,26 @@ Template.wall.events({
     });
   },
 
+   "click button.save": function (event) {
+    Meteor.call('save', function() {
+       canvas.save();
+    
+    });
+  },
+
   //choose a color. Initialise the last vals, otherwise a stray line will appear.
 
-  "click button.red": function () {
-    lastX=0;
-    lastY=0;
-    strokeColor = "red";
-  },
-
-  "click button.black": function () {
-    lastX=0;
-    lastY=0;
-    strokeColor = "black";
-  },
-
-  "click button.white": function () {
-    lastX=0;
-    lastY=0;
-    strokeColor = "white";
-  },
-
-  "click button.blue": function () {
-    lastX=0;
-    lastY=0;
-    strokeColor = "blue";
-  },
-
-  "click button.green": function () {
-    lastX=0;
-    lastY=0;
-    strokeColor = "green";
-  },
-
   "click button.thicker": function () {
-
     thickness+=1;
+    Session.set("thickness",thickness);
 
   },
 
-  "click button.thinner": function () {
-    
+  "click button.thinner": function () {    
     if (thickness > 0) {
       thickness-=1;
     }
+     Session.set("thickness",thickness);
   },
 
 
@@ -116,6 +106,7 @@ var markPoint = function() {
         // Or we could just set the line thickness using buttons and variable
         w: thickness,
         // We can also use strokeColor, defined by a selection
+
         c: strokeColor,
 
 
@@ -125,6 +116,111 @@ var markPoint = function() {
         lastY = (event.pageY - offset.top);
 
 }
+
+Template.body.events({
+    'click #red': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "red";
+      Session.set("color",strokeColor);
+    },
+    'click #pink': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "pink";
+      Session.set("color",strokeColor);
+    },
+    'click #purple': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "purple";
+      Session.set("color",strokeColor);
+    },
+    'click #deeppurple': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "deeppurple";
+      Session.set("color",strokeColor);
+    },
+    'click #indigo': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "indigo";
+      Session.set("color",strokeColor);
+    },
+    'click #lightblue': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "lightblue";
+      Session.set("color",strokeColor);
+    },
+    'click #cyan': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "cyan";
+      Session.set("color",strokeColor);
+    },
+    'click #teal': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "teal";
+      Session.set("color",strokeColor);
+    },
+     'click #lightgreen': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "lightgreen";
+      Session.set("color",strokeColor);
+    },
+     'click #lime': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "lime";
+      Session.set("color",strokeColor);
+    },
+     'click #lightyellow': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "lightyellow";
+      Session.set("color",strokeColor);
+    },
+     'click #orange': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "orange";
+      Session.set("color",strokeColor);
+    },
+     'click #deeporange': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "deeporange";
+      Session.set("color",strokeColor);
+    },
+     'click #grey': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "grey";
+      Session.set("color",strokeColor);
+    },
+     'click #bluegrey': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "bluegrey";
+      Session.set("color",strokeColor);
+    },
+     'click #brown': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "brown";
+      Session.set("color",strokeColor);
+    },
+     'click #teal': function(e) {
+      lastX=0;
+      lastY=0;
+      strokeColor = "teal";
+      Session.set("color",strokeColor);
+    },
+});
 
 Template.canvas.events({
   'click': function (event) {
@@ -144,3 +240,18 @@ Template.canvas.events({
     }
   }
 });
+
+Template.brush_types.events({
+    // event handler for when user changes the selected
+    // option in the drop down list
+    "change .js-select-brush-type":function(event){
+      event.preventDefault();
+      var value = $(event.target).val();
+      console.log(value);
+      Session.set("brushType",value);
+    }, 
+
+ });  
+
+
+
